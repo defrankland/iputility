@@ -1,4 +1,4 @@
-# ip-utilities
+# iputility
 IP utilities for go - including type for representing and comparing ip/range/CIDR/FQDN
 
 # Type Ip API
