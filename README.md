@@ -2,7 +2,7 @@
 IP utilities for go - including type for representing and comparing ip/range/CIDR/FQDN
 
 # Type Ip API
- - Used for identifying whether an endpoint (represented as a string) is:
+Used for identifying whether an endpoint (represented as a string) is:
   - IP address such as `192.111.65.3`
   - IP address range such as `192.168.0.0-192.200.255.255`
   - CIDR such as `192.168.55.33/8`
