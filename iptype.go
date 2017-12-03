@@ -69,7 +69,7 @@ func GetType(endpoint string) Ip {
 	return Ip{Type: IPTYPE_UNDEFINED, Endpoint: ""}
 }
 
-func (t Ip) GetFirst() string {
+func (t *Ip) GetFirst() string {
 
 	switch t.Type {
 	case IPTYPE_ADDRESS:
@@ -111,6 +111,15 @@ func (t *Ip) Equals(t1 Ip) bool {
 	return false
 }
 
+func (t *Ip) isIpType() bool {
+
+	if t.Type != IPTYPE_ADDRESS && t.Type != IPTYPE_CIDR && t.Type != IPTYPE_RANGE {
+		return false
+	}
+
+	return true
+}
+
 func toUint(ip net.IP) uint64 {
 
 	if ip == nil {
@@ -126,11 +135,4 @@ func toUint(ip net.IP) uint64 {
 	return ipB
 }
 
-func (t *Ip) isIpType() bool {
 
-	if t.Type != IPTYPE_ADDRESS && t.Type != IPTYPE_CIDR && t.Type != IPTYPE_RANGE {
-		return false
-	}
-
-	return true
-}
