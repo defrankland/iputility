@@ -21,9 +21,9 @@ type Ip struct {
 
 `(t *Ip) GetFirst() string` returns the first endpoint in the range/CIDR. If t is an IP address, it returns the IP address. 
 
-`(t *Ip) In(t1 Ip) bool` returns `true` when the passed t1 Ip falls inside of t. If they are exactly equal, then it returns `false`. It works for any possible combination of IP, IP range, and CIDR. *Note:* Clearly the FQDN type doesn't seem to fit here, but I was going to tie this into an `nslookup` to resolve the FQDN. So, I'm only temporarily violating the single responsibility principle :). 
+`(t *Ip) In(t1 Ip) bool` returns `true` when the passed t1 Ip falls inside of t. If they are exactly equal, then it returns `false`. It works for any possible combination of IP, IP range, and CIDR. **Note:** Clearly the FQDN type doesn't seem to fit here, but I was going to tie this into an `nslookup` to resolve the FQDN. So, I'm only temporarily violating the single responsibility principle :)
 
-`(t *Ip) Equals(t1 Ip) bool` returns `true` when t and t1 are exactly equal and works for any possible combination of IP, IP range, and CIDR.
+`(t *Ip) Equals(t1 Ip) bool` returns `true` when t and t1 contain exactly the same range of IP addresses and works for any possible combination of IP, IP range, and CIDR.
 
 
 # Other Stuff
