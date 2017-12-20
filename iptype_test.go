@@ -249,7 +249,7 @@ var _ = Describe("ip type module", func() {
 
 			ip := net.ParseIP("255.255.255.1")
 
-			b := toUint(ip)
+			b := toUint64(ip)
 
 			var i uint64
 			for i = 0; i < uint64(len(ip)); i++ {
@@ -261,7 +261,17 @@ var _ = Describe("ip type module", func() {
 		})
 
 		It("return 0 when ip is nil", func() {
-			Expect(toUint(nil)).To(Equal(uint64(0)))
+			Expect(toUint64(nil)).To(Equal(uint64(0)))
+		})
+
+		It("return 0 when ip is smaller than min", func() {
+			b := make([]byte, net.IPv6len-1)
+			Expect(toUint64(b)).To(Equal(uint64(0)))
+		})
+
+		It("return 0 when ip is larger than max", func() {
+			b := make([]byte, net.IPv6len+1)
+			Expect(toUint64(b)).To(Equal(uint64(0)))
 		})
 	})
 

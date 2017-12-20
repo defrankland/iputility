@@ -26,7 +26,7 @@ func GetType(endpoint string) Ip {
 
 	ip := net.ParseIP(endpoint)
 	if ip != nil {
-		ipUint := toUint(ip)
+		ipUint := toUint64(ip)
 		return Ip{Type: IPTYPE_ADDRESS, Endpoint: endpoint, loUint: ipUint, hiUint: ipUint}
 	}
 
@@ -34,7 +34,7 @@ func GetType(endpoint string) Ip {
 	if cidrErr == nil {
 		os, bs := subnet.Mask.Size()
 
-		loUint := toUint(cidrIP)
+		loUint := toUint64(cidrIP)
 		hiUint := loUint + (1 << uint64(32-os)) - 1
 
 		if os == bs {
@@ -50,8 +50,8 @@ func GetType(endpoint string) Ip {
 		ipHi := net.ParseIP(ipRange[1])
 		if ipLo != nil && ipHi != nil {
 
-			loUint := toUint(ipLo)
-			hiUint := toUint(ipHi)
+			loUint := toUint64(ipLo)
+			hiUint := toUint64(ipHi)
 			if loUint > hiUint {
 				return Ip{Type: IPTYPE_UNDEFINED, Endpoint: ""}
 			} else if loUint == hiUint {
@@ -120,19 +120,12 @@ func (t *Ip) isIpType() bool {
 	return true
 }
 
-func toUint(ip net.IP) uint64 {
+func toUint64(ip net.IP) uint64 {
 
-	if ip == nil {
+	if len(ip) != net.IPv6len {
 		return 0
 	}
 
-	var ipB, i uint64
-	for i = 0; i < uint64(len(ip)); i++ {
-		opIdx := len(ip) - 1 - int(i)
-		ipB += uint64(ip[opIdx]) << (i * 8)
-	}
-
-	return ipB
+	return uint64(ip[15]) | uint64(ip[14])<<8 | uint64(ip[13])<<16 | uint64(ip[12])<<24 |
+		uint64(ip[11])<<32 | uint64(ip[10])<<40 | uint64(ip[9])<<48 | uint64(ip[8])<<56
 }
-
-
