@@ -6,7 +6,7 @@ ws("${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}/src/github.com/defrankla
             env.PATH="${GOPATH}/bin:$PATH"
     
             sh 'ls -la'
-            sh 'cd ./jenkins'
+            sh 'cd ../'
             stage('Test'){
                 sh 'echo $GOPATH'
                 sh 'go version'                   
