@@ -6,7 +6,7 @@ ws("${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}/src/github.com/defrankla
             env.PATH="${GOPATH}/bin:$PATH"
 
             stage ('Checkout'){
-                git url: 'https://github.com/defrankland/iputility'
+                git branch: 'jenkinsfile', url: 'https://github.com/defrankland/iputility'
             }
 
             stage('Test'){
