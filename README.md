@@ -8,6 +8,7 @@ Used for identifying whether an endpoint (represented as a string) is:
   - CIDR such as `192.168.55.33/8`
   - FQDN such as `somefqdn.com`
 
+
 ```go 
 type Ip struct {
 	Type     IpId
