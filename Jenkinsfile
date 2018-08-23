@@ -7,6 +7,7 @@ node {
             stage('Test'){
                 sh 'echo $GOPATH'
                 sh 'go version'                   
+                sh 'go test -cover ./...'
             }
         }
     }
